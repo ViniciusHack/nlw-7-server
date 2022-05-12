@@ -5,8 +5,9 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// to change for postgres
 datasource db {
-  provider = "postgres"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -16,6 +17,21 @@ model Feedback {
   type       String
   comment    String
   screenshot String?
+  createdAt  DateTime @default(now())
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [uid])
 
   @@map("feedbacks")
+}
+
+model User {
+  uid        String   @id()
+  name       String
+  email      String
+  imageURL   String
+  created_at DateTime @default(now())
+
+  Feedback Feedback[]
+  @@map("users")
 }

@@ -11,7 +11,7 @@ const transport = nodemailer.createTransport({
 });
 
 
-export class NodemailerMailAdapater implements MailAdapter {
+export class NodemailerMailAdapter implements MailAdapter {
   async sendMail({ subject, body }: SendMailData) {
     await transport.sendMail({
     from: "Equipe Fidget <oi@fidget.com>",
